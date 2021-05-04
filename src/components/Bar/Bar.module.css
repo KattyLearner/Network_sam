@@ -1,0 +1,12 @@
+.nav{
+    grid-area: n;
+    background-color: aliceblue;
+    padding: 20px;
+}
+.item a {
+    color: lightcoral;
+    text-decoration: none;
+}
+.item a.activeLink {
+    color: hotpink;
+}
