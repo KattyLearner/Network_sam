@@ -13,7 +13,7 @@ export type StoreType = {
     // addPost: () => void
     // updateNewPostValue: (postText: string) => void
 
-    dispatch: (action: ReturnType<typeof addPostActionCreator> | ReturnType<typeof onPostChangeActionCreator>) => void
+    dispatch: (action: AddPostActionType | UpdateNewPostValueType) => void
 
 }
 
@@ -25,8 +25,8 @@ export type StoreType = {
 //     postText: string
 // }
 
-// export type AddPostActionType = ReturnType<typeof addPostActionCreator>
-// export type UpdateNewPostValueType = ReturnType<typeof onPostChangeActionCreator>
+export type AddPostActionType = ReturnType<typeof addPostActionCreator>
+export type UpdateNewPostValueType = ReturnType<typeof onPostChangeActionCreator>
 
 const UPDATE_NEW_POST_VALUE = 'UPDATE-NEW-POST-VALUE'
 
