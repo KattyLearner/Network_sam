@@ -10,27 +10,21 @@ export type StoreType = {
     getState: () => void
     subscribe: (observer: () => void) => void
 
-    // addPost: () => void
-    // updateNewPostValue: (postText: string) => void
-
-    dispatch: (action: AddPostActionType | UpdateNewPostValueType) => void
+    dispatch: (action: AddPostActionType | UpdateNewPostValueType | UpdateNewMessageBodyType | UpdateSendMessageType ) => void
 
 }
 
-// export type AddPostActionType = {
-//     type: 'ADD-POST'
-// }
-// export type UpdateNewPostValueType = {
-//     type: 'UPDATE-NEW-POST-VALUE'
-//     postText: string
-// }
 
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type UpdateNewPostValueType = ReturnType<typeof onPostChangeActionCreator>
+export type UpdateNewMessageBodyType = ReturnType<typeof updateNewMessageBodyCreator>
+export type UpdateSendMessageType = ReturnType<typeof sendMessageCreator>
 
 const UPDATE_NEW_POST_VALUE = 'UPDATE-NEW-POST-VALUE'
-
 const ADD_POST = 'ADD-POST'
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
+const SEND_MESSAGE = 'SEND-MESSAGE'
+
 
 let store:  StoreType ={
     _state: {
@@ -74,6 +68,7 @@ let store:  StoreType ={
                 {id: 4, message: 'What is up?'},
                 {id: 5, message: 'What?'},
             ],
+            newMessageBody: ''
         }
     },
     getState() {
@@ -82,21 +77,6 @@ let store:  StoreType ={
     _rerenderEntireTree() {
         console.log('state is changed')
     },
-    // addPost() {
-    //     const newPost: PostDataType = {
-    //         id: 5,
-    //         message: this._state.profilePage.newPostValue,
-    //         like: '0 likes',
-    //         avatar: 'https://2.bp.blogspot.com/-YEnAKE_GJX8/XIv9wTCbXXI/AAAAAAAAAGs/nDICcMdoMIoFSvbPhpcfVNTb1LaJYQWYQCK4BGAYYCw/s1600/myAvatar.png'
-    //     }
-    //     this._state.profilePage.postsData.push(newPost)
-    //     this._state.profilePage.newPostValue= ''
-    //     this._rerenderEntireTree()
-    // },
-    // updateNewPostValue (postText) {
-    //     this._state.profilePage.newPostValue = postText
-    //     this._rerenderEntireTree()
-    // },
     subscribe (observer)  {
         this._rerenderEntireTree=observer
     },
@@ -115,14 +95,24 @@ let store:  StoreType ={
         } else if (action.type === UPDATE_NEW_POST_VALUE){
             this._state.profilePage.newPostValue = action.postText
             this._rerenderEntireTree()
+        } else if (action.type === UPDATE_NEW_MESSAGE_BODY){
+            this._state.messagePage.newMessageBody = action.newBody
+            this._rerenderEntireTree()
+        } else if (action.type === SEND_MESSAGE){
+            let body = this._state.messagePage.newMessageBody
+            this._state.messagePage.newMessageBody=''
+            this._state.messagePage.messageData.push( {id: 6, message: body})
+            this._rerenderEntireTree()
         }
     }
 
 }
 
 export const addPostActionCreator = () => ({type: ADD_POST} as const)
-
 export const onPostChangeActionCreator = (value: string) => ({type: UPDATE_NEW_POST_VALUE , postText: value } as const)
+
+export const updateNewMessageBodyCreator = (value: string) => ({type: UPDATE_NEW_MESSAGE_BODY , newBody: value } as const)
+export const sendMessageCreator = () => ({type: SEND_MESSAGE } as const)
 
 
 

@@ -22,6 +22,7 @@ type ProfilePageType={
 }
 type MessagePageType={
     messageData: MessageDataType[]
+    newMessageBody: string
 }
 export type StateType ={
     profilePage: ProfilePageType
@@ -37,7 +38,10 @@ const App = (props: AppPropsType) => {
             <div className={'appWrapperContent'}>
                 <Route path={'/dialogs'} render ={()=> <Dialogs
                                                             dialogsData={props.store._state.profilePage.dialogsData}
-                                                            messageData={props.store._state.messagePage.messageData} />} />
+                                                            messageData={props.store._state.messagePage.messageData}
+                                                            newMessageBody={props.store._state.messagePage.newMessageBody}
+                                                            dispatch={props.store.dispatch.bind(props.store)}
+                />} />
                 <Route path={'/profile'} render ={()=> <Profile
                                                             postsData={props.store._state.profilePage.postsData}
                                                             dispatch={props.store.dispatch.bind(props.store)}
