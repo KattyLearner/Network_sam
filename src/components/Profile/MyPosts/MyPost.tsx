@@ -2,6 +2,7 @@ import React from 'react';
 import s from './MyPost.module.css'
 import Post from "./Post/Post";
 import {PostDataPropsType} from "../Profile";
+import {addPostActionCreator, onPostChangeActionCreator} from "../../Redux/State";
 
 
 
@@ -14,7 +15,7 @@ const MyPosts = (props: PostDataPropsType)=>{
     let addPost = () => {
         let text = newPostElement.current?.value
        if (text) {
-        props.addPost()
+        props.dispatch(addPostActionCreator())
        }
 
     }
@@ -23,7 +24,7 @@ const MyPosts = (props: PostDataPropsType)=>{
     let onPostChange = () => {
         let value = newPostElement.current?.value
        if (value) {
-           props.updateNewPostValue(value)
+           props.dispatch(onPostChangeActionCreator(value))
        }
     }
 

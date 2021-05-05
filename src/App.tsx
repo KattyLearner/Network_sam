@@ -40,8 +40,7 @@ const App = (props: AppPropsType) => {
                                                             messageData={props.store._state.messagePage.messageData} />} />
                 <Route path={'/profile'} render ={()=> <Profile
                                                             postsData={props.store._state.profilePage.postsData}
-                                                            addPost={props.store.addPost.bind(props.store)}
-                                                            updateNewPostValue = {props.store.updateNewPostValue.bind(props.store)}
+                                                            dispatch={props.store.dispatch.bind(props.store)}
                                                             newPostValue={props.store._state.profilePage.newPostValue}/>} />
                 <Route path={'/settings'} render ={()=> <Settings/>} />
                 <Route path={'/news'} render ={()=> <News/>} />
