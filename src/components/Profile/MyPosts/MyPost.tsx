@@ -2,7 +2,8 @@ import React from 'react';
 import s from './MyPost.module.css'
 import Post from "./Post/Post";
 import {PostDataPropsType} from "../Profile";
-import {addPostActionCreator, onPostChangeActionCreator} from "../../Redux/State";
+import {addPostActionCreator, onPostChangeActionCreator} from "../../Redux/profileReducer";
+
 
 
 

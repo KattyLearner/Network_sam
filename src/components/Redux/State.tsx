@@ -1,6 +1,7 @@
 import React from 'react';
-import {PostDataType} from "../Profile/Profile";
 import {StateType} from "../../App";
+import profileReducer, {addPostActionCreator, onPostChangeActionCreator} from "./profileReducer";
+import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogsReducer";
 
 
 export type StoreType = {
@@ -20,17 +21,17 @@ export type UpdateNewPostValueType = ReturnType<typeof onPostChangeActionCreator
 export type UpdateNewMessageBodyType = ReturnType<typeof updateNewMessageBodyCreator>
 export type UpdateSendMessageType = ReturnType<typeof sendMessageCreator>
 
-const UPDATE_NEW_POST_VALUE = 'UPDATE-NEW-POST-VALUE'
-const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
-const SEND_MESSAGE = 'SEND-MESSAGE'
 
-
-let store:  StoreType ={
+let store:  StoreType = {
     _state: {
         profilePage: {
             postsData: [
-                {id: 1, message: 'Hi', like: '8likes', avatar: 'https://klike.net/uploads/posts/2019-03/1551511784_4.jpg'},
+                {
+                    id: 1,
+                    message: 'Hi',
+                    like: '8likes',
+                    avatar: 'https://klike.net/uploads/posts/2019-03/1551511784_4.jpg'
+                },
                 {
                     id: 2,
                     message: 'How is it going?',
@@ -77,44 +78,19 @@ let store:  StoreType ={
     _rerenderEntireTree() {
         console.log('state is changed')
     },
-    subscribe (observer)  {
-        this._rerenderEntireTree=observer
+    subscribe(observer) {
+        this._rerenderEntireTree = observer
     },
 
-    dispatch (action) {
-        if(action.type === ADD_POST) {
-            const newPost: PostDataType = {
-                id: 5,
-                message: this._state.profilePage.newPostValue,
-                like: '0 likes',
-                avatar: 'https://2.bp.blogspot.com/-YEnAKE_GJX8/XIv9wTCbXXI/AAAAAAAAAGs/nDICcMdoMIoFSvbPhpcfVNTb1LaJYQWYQCK4BGAYYCw/s1600/myAvatar.png'
-            }
-            this._state.profilePage.postsData.push(newPost)
-            this._state.profilePage.newPostValue= ''
-            this._rerenderEntireTree()
-        } else if (action.type === UPDATE_NEW_POST_VALUE){
-            this._state.profilePage.newPostValue = action.postText
-            this._rerenderEntireTree()
-        } else if (action.type === UPDATE_NEW_MESSAGE_BODY){
-            this._state.messagePage.newMessageBody = action.newBody
-            this._rerenderEntireTree()
-        } else if (action.type === SEND_MESSAGE){
-            let body = this._state.messagePage.newMessageBody
-            this._state.messagePage.newMessageBody=''
-            this._state.messagePage.messageData.push( {id: 6, message: body})
-            this._rerenderEntireTree()
-        }
+    dispatch(action) {
+        profileReducer(this._state.profilePage, action)
+        dialogsReducer(this._state.messagePage, action)
+
+        this._rerenderEntireTree()
+
+
     }
-
 }
-
-export const addPostActionCreator = () => ({type: ADD_POST} as const)
-export const onPostChangeActionCreator = (value: string) => ({type: UPDATE_NEW_POST_VALUE , postText: value } as const)
-
-export const updateNewMessageBodyCreator = (value: string) => ({type: UPDATE_NEW_MESSAGE_BODY , newBody: value } as const)
-export const sendMessageCreator = () => ({type: SEND_MESSAGE } as const)
-
-
 
 
 export default store

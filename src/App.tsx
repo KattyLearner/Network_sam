@@ -15,12 +15,12 @@ type AppPropsType = {
 }
 
 
-type ProfilePageType={
+export type ProfilePageType={
     dialogsData: DialogPropType[]
     postsData: PostDataType[]
     newPostValue: string
 }
-type MessagePageType={
+export type MessagePageType={
     messageData: MessageDataType[]
     newMessageBody: string
 }

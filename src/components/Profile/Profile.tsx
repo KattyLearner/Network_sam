@@ -6,8 +6,6 @@ import {AddPostActionType, UpdateNewPostValueType} from "../Redux/State";
 
 export type PostDataPropsType ={
     postsData: PostDataType[]
-    // addPost: () => void
-    // updateNewPostValue: (postText: string) => void
     newPostValue: string
     dispatch: (action: AddPostActionType | UpdateNewPostValueType) => void
 }
