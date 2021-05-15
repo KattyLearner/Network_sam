@@ -8,12 +8,6 @@ import {StoreType} from "../Redux/ReduxStore";
 import {StateType} from "../../App";
 
 
-
-type DialogsPropsType = {
-    store: StoreType
-    state: StateType
-}
-
 // type DialogsPropsType = {
 //     dialogsData: DialogPropType[]
 //     messageData: MessageDataType[]
@@ -21,6 +15,11 @@ type DialogsPropsType = {
 //     dispatch: (action: UpdateNewMessageBodyType | UpdateSendMessageType ) => void
 // }
 
+export type DialogsPropsType = {
+    state: StateType
+    sendMessageClick: () => void
+    newMessageChange: (newBody: string) => void
+}
 
 export type MessageDataType = {
     id: number
@@ -32,12 +31,14 @@ const Dialogs = (props: DialogsPropsType) =>{
     let dialogsElements = props.state.profilePage.dialogsData.map( (dialog)=> <DialogItem name={dialog.name} id={dialog.id}/> )
     let messageElements = props.state.messagePage.messageData.map((message)=> <Message message={message.message}/>)
     let newMessageBody = props.state.messagePage.newMessageBody
+
     let onSendMessageClick = ()=>{
-        props.store.dispatch(sendMessageCreator())
+        props.sendMessageClick()
     }
+
     let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) =>{
         let newBody= e.currentTarget.value
-        props.store.dispatch(updateNewMessageBodyCreator(newBody))
+        props.newMessageChange(newBody)
     }
 
 

@@ -3,11 +3,16 @@ import s from './MyPost.module.css'
 import Post from "./Post/Post";
 import {PostDataPropsType} from "../Profile";
 import {addPostActionCreator, onPostChangeActionCreator} from "../../Redux/profileReducer";
+import {ProfilePageType} from "../../../App";
 
 
+export type MyPostDataPropsType ={
+    postsData: ProfilePageType
+    updateNewPostText: (value: string) => void
+    addPost: () => void
+}
 
-
-const MyPosts = (props: PostDataPropsType)=>{
+const MyPosts = (props: MyPostDataPropsType)=>{
 
     let postElements = props.postsData.postsData.map((post)=> <Post message={post.message} like={post.like} avatar={post.avatar}/> )
 
@@ -16,16 +21,15 @@ const MyPosts = (props: PostDataPropsType)=>{
     let addPost = () => {
         let text = newPostElement.current?.value
        if (text) {
-        props.dispatch(addPostActionCreator())
+           props.addPost()
        }
-
     }
 
 
     let onPostChange = () => {
         let value = newPostElement.current?.value
        if (value) {
-           props.dispatch(onPostChangeActionCreator(value))
+           props.updateNewPostText(value)
        }
     }
 
