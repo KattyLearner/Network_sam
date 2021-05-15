@@ -1,10 +1,21 @@
 import {MessagePageType, StateType} from "../../App";
-import {AddPostActionType, UpdateNewMessageBodyType, UpdateNewPostValueType, UpdateSendMessageType} from "./State";
+import {AddPostActionType, UpdateNewMessageBodyType, UpdateNewPostValueType, UpdateSendMessageType} from "./Store";
 
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 const SEND_MESSAGE = 'SEND-MESSAGE'
 
-const dialogsReducer = (state: MessagePageType, action: AddPostActionType | UpdateNewPostValueType | UpdateNewMessageBodyType | UpdateSendMessageType) => {
+let initialState =  {
+    messageData: [
+        {id: 1, message: 'Hi'},
+        {id: 2, message: 'How is it going'},
+        {id: 3, message: 'How are you?'},
+        {id: 4, message: 'What is up?'},
+        {id: 5, message: 'What?'},
+    ],
+    newMessageBody: ''
+}
+
+const dialogsReducer = (state = initialState, action: AddPostActionType | UpdateNewPostValueType | UpdateNewMessageBodyType | UpdateSendMessageType) => {
 
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:

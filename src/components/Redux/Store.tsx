@@ -6,7 +6,7 @@ import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from ".
 
 export type StoreType = {
     _state: StateType
-    _rerenderEntireTree: () => void
+    _rerenderEntireTree: (state: StateType) => void
 
     getState: () => void
     subscribe: (observer: () => void) => void
@@ -86,7 +86,7 @@ let store:  StoreType = {
         profileReducer(this._state.profilePage, action)
         dialogsReducer(this._state.messagePage, action)
 
-        this._rerenderEntireTree()
+        this._rerenderEntireTree(this._state)
 
 
     }

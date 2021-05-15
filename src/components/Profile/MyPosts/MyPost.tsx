@@ -9,7 +9,7 @@ import {addPostActionCreator, onPostChangeActionCreator} from "../../Redux/profi
 
 const MyPosts = (props: PostDataPropsType)=>{
 
-    let postElements = props.postsData.map((post)=> <Post message={post.message} like={post.like} avatar={post.avatar}/> )
+    let postElements = props.postsData.postsData.map((post)=> <Post message={post.message} like={post.like} avatar={post.avatar}/> )
 
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
@@ -36,7 +36,7 @@ const MyPosts = (props: PostDataPropsType)=>{
                 <div>
                     <textarea
                               ref={newPostElement}
-                              value={props.newPostValue}
+                              value={props.postsData.newPostValue}
                               onChange={onPostChange}
                     />
                 </div>

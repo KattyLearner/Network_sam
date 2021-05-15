@@ -2,17 +2,24 @@ import React, {ChangeEvent} from 'react';
 import DialogItem, {DialogPropType} from './DialogItem/DialogItem';
 import s from './Dialogs.module.css'
 import Message from './Message/Message';
-import {UpdateNewMessageBodyType, UpdateSendMessageType} from "../Redux/State";
+import {UpdateNewMessageBodyType, UpdateSendMessageType} from "../Redux/Store";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../Redux/dialogsReducer";
+import {StoreType} from "../Redux/ReduxStore";
+import {StateType} from "../../App";
 
 
 
 type DialogsPropsType = {
-    dialogsData: DialogPropType[]
-    messageData: MessageDataType[]
-    newMessageBody: string
-    dispatch: (action: UpdateNewMessageBodyType | UpdateSendMessageType ) => void
+    store: StoreType
+    state: StateType
 }
+
+// type DialogsPropsType = {
+//     dialogsData: DialogPropType[]
+//     messageData: MessageDataType[]
+//     newMessageBody: string
+//     dispatch: (action: UpdateNewMessageBodyType | UpdateSendMessageType ) => void
+// }
 
 
 export type MessageDataType = {
@@ -22,15 +29,15 @@ export type MessageDataType = {
 
 const Dialogs = (props: DialogsPropsType) =>{
 
-    let dialogsElements = props.dialogsData.map( (dialog)=> <DialogItem name={dialog.name} id={dialog.id}/> )
-    let messageElements = props.messageData.map((message)=> <Message message={message.message}/>)
-    let newMessageBody = props.newMessageBody
+    let dialogsElements = props.state.profilePage.dialogsData.map( (dialog)=> <DialogItem name={dialog.name} id={dialog.id}/> )
+    let messageElements = props.state.messagePage.messageData.map((message)=> <Message message={message.message}/>)
+    let newMessageBody = props.state.messagePage.newMessageBody
     let onSendMessageClick = ()=>{
-        props.dispatch(sendMessageCreator())
+        props.store.dispatch(sendMessageCreator())
     }
     let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) =>{
         let newBody= e.currentTarget.value
-        props.dispatch(updateNewMessageBodyCreator(newBody))
+        props.store.dispatch(updateNewMessageBodyCreator(newBody))
     }
 
 
