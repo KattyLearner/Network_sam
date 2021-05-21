@@ -1,20 +1,18 @@
 import React from 'react';
 import s from './MyPost.module.css'
 import Post from "./Post/Post";
-import {PostDataPropsType} from "../Profile";
-import {addPostActionCreator, onPostChangeActionCreator} from "../../Redux/profileReducer";
 import {ProfilePageType} from "../../../App";
 
 
 export type MyPostDataPropsType ={
-    postsData: ProfilePageType
+    profilePage: ProfilePageType
     updateNewPostText: (value: string) => void
     addPost: () => void
 }
 
 const MyPosts = (props: MyPostDataPropsType)=>{
 
-    let postElements = props.postsData.postsData.map((post)=> <Post message={post.message} like={post.like} avatar={post.avatar}/> )
+    let postElements = props.profilePage.postsData.map((post)=> <Post message={post.message} like={post.like} avatar={post.avatar}/> )
 
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
@@ -40,7 +38,7 @@ const MyPosts = (props: MyPostDataPropsType)=>{
                 <div>
                     <textarea
                               ref={newPostElement}
-                              value={props.postsData.newPostValue}
+                              value={props.profilePage.newPostValue}
                               onChange={onPostChange}
                     />
                 </div>

@@ -52,14 +52,6 @@ let store:  StoreType = {
                 },
             ],
             newPostValue: '',
-            dialogsData: [
-                {id: 1, name: 'Anna'},
-                {id: 2, name: 'Vlad'},
-                {id: 3, name: 'Dima'},
-                {id: 4, name: 'Darya'},
-                {id: 5, name: 'Vika'},
-                {id: 6, name: 'Mia'}
-            ]
         },
         messagePage: {
             messageData: [
@@ -69,7 +61,15 @@ let store:  StoreType = {
                 {id: 4, message: 'What is up?'},
                 {id: 5, message: 'What?'},
             ],
-            newMessageBody: ''
+            newMessageBody: '',
+            dialogsData: [
+                {id: 1, name: 'Anna'},
+                {id: 2, name: 'Vlad'},
+                {id: 3, name: 'Dima'},
+                {id: 4, name: 'Darya'},
+                {id: 5, name: 'Vika'},
+                {id: 6, name: 'Mia'}
+            ]
         }
     },
     getState() {

@@ -17,25 +17,25 @@ import {
 } from "./components/Redux/Store";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
-type AppPropsType = {
-    dispatch: (action: AddPostActionType | UpdateNewPostValueType | UpdateNewMessageBodyType | UpdateSendMessageType ) => void
-    store: StoreType
-    state: StateType
-}
+// type AppPropsType = {
+//     dispatch: (action: AddPostActionType | UpdateNewPostValueType | UpdateNewMessageBodyType | UpdateSendMessageType ) => void
+//     store: StoreType
+//     state: StateType
+// }
 
 export type ProfilePageType={
-    dialogsData: DialogPropType[]
     postsData: PostDataType[]
     newPostValue: string
 }
 export type MessagePageType={
     messageData: MessageDataType[]
     newMessageBody: string
+    dialogsData: DialogPropType[]
 }
-export type StateType ={
-    profilePage: ProfilePageType
-    messagePage: MessagePageType
-}
+// export type StateType ={
+//     profilePage: ProfilePageType
+//     messagePage: MessagePageType
+// }
 
 // export type ProfilePageType={
 //     dialogsData: DialogPropType[]
@@ -46,25 +46,42 @@ export type StateType ={
 //     messageData: MessageDataType[]
 //     newMessageBody: string
 // }
-// export type StateType ={
-//     profilePage: ProfilePageType
-//     messagePage: MessagePageType
+export type StateType ={
+    profilePage: ProfilePageType
+    messagePage: MessagePageType
+}
+
+// const App = () => {
+//     return (
+//        <BrowserRouter>
+//         <div className='appWrapper'>
+//             <Header/>
+//             <Navbar/>
+//             <div className={'appWrapperContent'}>
+//                 <Route path={'/dialogs'} render ={()=> <DialogsContainer store={props.store} />} />
+//                 <Route path={'/profile'} render ={()=> <Profile store={props.store} />} />
+//                 <Route path={'/settings'} render ={()=> <Settings/>} />
+//                 <Route path={'/news'} render ={()=> <News/>} />
+//             </div>
+//         </div>
+//        </BrowserRouter>
+//     );
 // }
 
-const App = (props: AppPropsType) => {
+const App = () => {
     return (
-       <BrowserRouter>
-        <div className='appWrapper'>
-            <Header/>
-            <Navbar/>
-            <div className={'appWrapperContent'}>
-                <Route path={'/dialogs'} render ={()=> <DialogsContainer store={props.store} />} />
-                <Route path={'/profile'} render ={()=> <Profile store={props.store} />} />
-                <Route path={'/settings'} render ={()=> <Settings/>} />
-                <Route path={'/news'} render ={()=> <News/>} />
+        <BrowserRouter>
+            <div className='appWrapper'>
+                <Header/>
+                <Navbar/>
+                <div className={'appWrapperContent'}>
+                    <Route path={'/dialogs'} render ={()=> <DialogsContainer />} />
+                    <Route path={'/profile'} render ={()=> <Profile  />} />
+                    <Route path={'/settings'} render ={()=> <Settings/>} />
+                    <Route path={'/news'} render ={()=> <News/>} />
+                </div>
             </div>
-        </div>
-       </BrowserRouter>
+        </BrowserRouter>
     );
 }
 

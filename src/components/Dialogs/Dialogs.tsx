@@ -5,18 +5,12 @@ import Message from './Message/Message';
 import {UpdateNewMessageBodyType, UpdateSendMessageType} from "../Redux/Store";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../Redux/dialogsReducer";
 import {StoreType} from "../Redux/ReduxStore";
-import {StateType} from "../../App";
+import {MessagePageType} from "../../App";
 
 
-// type DialogsPropsType = {
-//     dialogsData: DialogPropType[]
-//     messageData: MessageDataType[]
-//     newMessageBody: string
-//     dispatch: (action: UpdateNewMessageBodyType | UpdateSendMessageType ) => void
-// }
 
 export type DialogsPropsType = {
-    state: StateType
+    messagePage: MessagePageType,
     sendMessageClick: () => void
     newMessageChange: (newBody: string) => void
 }
@@ -28,9 +22,11 @@ export type MessageDataType = {
 
 const Dialogs = (props: DialogsPropsType) =>{
 
-    let dialogsElements = props.state.profilePage.dialogsData.map( (dialog)=> <DialogItem name={dialog.name} id={dialog.id}/> )
-    let messageElements = props.state.messagePage.messageData.map((message)=> <Message message={message.message}/>)
-    let newMessageBody = props.state.messagePage.newMessageBody
+    let state = props.messagePage
+
+    let dialogsElements = state.dialogsData.map( (dialog)=> <DialogItem name={dialog.name} id={dialog.id}/> )
+    let messageElements = state.messageData.map((message)=> <Message message={message.message}/>)
+    let newMessageBody = props.messagePage.newMessageBody
 
     let onSendMessageClick = ()=>{
         props.sendMessageClick()

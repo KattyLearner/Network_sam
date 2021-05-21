@@ -1,20 +1,22 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import { combineReducers, createStore} from "redux";
 import profileReducer from "./profileReducer";
 import dialogsReducer from "./dialogsReducer";
-import {StateType} from "../../App";
-import {AddPostActionType, UpdateNewMessageBodyType, UpdateNewPostValueType, UpdateSendMessageType} from "./Store";
 
 
-type ReducersType = typeof reducers
-export type AppStateType = ReturnType<ReducersType>
+
+// type ReducersType = typeof reducers
+// export type AppStateType = ReturnType<ReducersType>
+// export type StoreType = typeof store
+
+export type AppStateType = ReturnType<typeof rootReducer>
 export type StoreType = typeof store
 
 
-let reducers = combineReducers({
+let rootReducer = combineReducers({
     profilePage: profileReducer,
     messagePage: dialogsReducer
 })
 
-let store = createStore(reducers)
+let store = createStore(rootReducer)
 
 export default store

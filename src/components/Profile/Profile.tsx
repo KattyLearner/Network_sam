@@ -8,20 +8,17 @@ import MyPostsContainer from "./MyPosts/MyPostContainer";
 import {StoreType} from "../Redux/ReduxStore";
 
 
-export type MyPostDataPropsType ={
-    postsData: ProfilePageType
-    updateNewPostText: (text: string) => void
-    addPost: (value: string) => void
-}
-export type PostDataPropsType ={
-    store: StoreType
-}
+// export type MyPostDataPropsType ={
+//     postsData: ProfilePageType
+//     updateNewPostText: (text: string) => void
+//     addPost: (value: string) => void
+// }
 
 // export type PostDataPropsType ={
-//     postsData: PostDataType[]
-//     newPostValue: string
-//     dispatch: (action: AddPostActionType | UpdateNewPostValueType) => void
+//     store: StoreType
 // }
+
+
 
 export type PostDataType = {
     id: number
@@ -31,11 +28,11 @@ export type PostDataType = {
 }
 
 
-const Profile = (props: PostDataPropsType)=>{
+const Profile = ()=>{
     return (
         <div>
             <ProfileInfo />
-            <MyPostsContainer store={props.store} />
+            <MyPostsContainer  />
             {/*<MyPosts postsData={props.postsData} dispatch={props.dispatch}  />*/}
         </div>
     )

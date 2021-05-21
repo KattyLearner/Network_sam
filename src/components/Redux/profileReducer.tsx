@@ -32,15 +32,7 @@ let initialState =  {
             avatar: 'https://99px.ru/sstorage/56/2017/05/11505171723012442.jpg'
         },
     ],
-    newPostValue: '',
-    dialogsData: [
-        {id: 1, name: 'Anna'},
-        {id: 2, name: 'Vlad'},
-        {id: 3, name: 'Dima'},
-        {id: 4, name: 'Darya'},
-        {id: 5, name: 'Vika'},
-        {id: 6, name: 'Mia'}
-    ]
+    newPostValue: ''
 }
 
 const profileReducer = (state = initialState, action: AddPostActionType | UpdateNewPostValueType | UpdateNewMessageBodyType | UpdateSendMessageType) => {
