@@ -1,4 +1,3 @@
-import {MessagePageType, StateType} from "../../App";
 import {AddPostActionType, UpdateNewMessageBodyType, UpdateNewPostValueType, UpdateSendMessageType} from "./Store";
 
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
@@ -24,18 +23,23 @@ let initialState =  {
 }
 
 const dialogsReducer = (state = initialState, action: AddPostActionType | UpdateNewPostValueType | UpdateNewMessageBodyType | UpdateSendMessageType) => {
+  let stateCopy = {
+      ...state,
+      messageData: [...state.messageData]
+  }
 
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:
-            state.newMessageBody = action.newBody
-            break;
+            stateCopy.newMessageBody = action.newBody
+            return stateCopy
         case SEND_MESSAGE:
-            let body = state.newMessageBody
-            state.newMessageBody = ''
-            state.messageData.push({id: 6, message: body})
-            break;
+            let body = stateCopy.newMessageBody
+            stateCopy.newMessageBody = ''
+            stateCopy.messageData.push({id: 6, message: body})
+            return stateCopy
+        default:
+            return state
     }
-    return state
 }
 
 export const updateNewMessageBodyCreator = (value: string) => ({type: UPDATE_NEW_MESSAGE_BODY , newBody: value } as const)

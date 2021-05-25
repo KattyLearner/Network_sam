@@ -1,36 +1,18 @@
-import React, {ChangeEvent} from 'react';
-import DialogItem, {DialogPropType} from './DialogItem/DialogItem';
-import Message from './Message/Message';
-import {UpdateNewMessageBodyType, UpdateSendMessageType} from "../Redux/Store";
+import React from 'react';
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../Redux/dialogsReducer";
-import {AppStateType, StoreType} from "../Redux/ReduxStore";
-import {MessagePageType, ProfilePageType, StateType} from "../../App";
+import {AppStateType} from "../Redux/ReduxStore";
+import {MessagePageType} from "../../App";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 
 
 
-export type MessageDataType = {
-    id: number
-    message: string
-}
-
-// const DialogsContainer = (props: DialogsContainerPropsType) =>{
-//
-//     let state = props.store.getState()
-//
-//     let sendMessageClick = ()=>{
-//         props.store.dispatch(sendMessageCreator())
-//     }
-//
-//     let newMessageChange = (newBody: string) =>{
-//         props.store.dispatch(updateNewMessageBodyCreator(newBody))
-//     }
-//
-//
-//     return (<Dialogs sendMessageClick={sendMessageClick} newMessageChange={newMessageChange} state={state} />)
+// export type MessageDataType = {
+//     id: number
+//     message: string
 // }
+
 type MapStateToPropsType = {
     messagePage: MessagePageType
 }
