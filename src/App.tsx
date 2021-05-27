@@ -10,6 +10,8 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {DialogPropType} from "./components/Dialogs/DialogItem/DialogItem";
 
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import Users from "./components/Users/Users";
+import {UsersContainer} from "./components/Users/UsersContainer";
 
 // type AppPropsType = {
 //     dispatch: (action: AddPostActionType | UpdateNewPostValueType | UpdateNewMessageBodyType | UpdateSendMessageType ) => void
@@ -43,6 +45,7 @@ const App = () => {
                     <Route path={'/profile'} render ={()=> <Profile  />} />
                     <Route path={'/settings'} render ={()=> <Settings/>} />
                     <Route path={'/news'} render ={()=> <News/>} />
+                    <Route path={'/users'} render ={()=> <UsersContainer/>} />
                 </div>
             </div>
         </BrowserRouter>
