@@ -3,18 +3,23 @@ import {FollowACType, SetUsersACType, UnfollowACType} from "./Store";
 export type UsersPageType = Array<UsersType>
 
 export type UsersType = {
+    name: string
     id: number
-    followed: boolean
-    fullName: string
+    uniqueUrName: string
+    photos: PhotoType
     status: string
-    location: LocationType
-    photo: string
+    followed: boolean
+    // location: LocationType
 }
 
-export type LocationType = {
-    city: string
-    country: string
+export type PhotoType = {
+    small: string
+    large: string
 }
+// export type LocationType = {
+//     city: string
+//     country: string
+// }
 export type InitialStateType = {
     users: UsersPageType
 }
