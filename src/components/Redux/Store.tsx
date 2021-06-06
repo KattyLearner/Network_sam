@@ -2,7 +2,7 @@ import React from 'react';
 import {StateType} from "../../App";
 import profileReducer, {addPostActionCreator, onPostChangeActionCreator} from "./profileReducer";
 import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogsReducer";
-import {followAC, setCurrentPageAC, setFetchingAC, setTotalUserCountAC, setUsersAC, unfollowAC} from "./usersReducer";
+
 
 
 export type StoreType = {
@@ -21,12 +21,7 @@ export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type UpdateNewPostValueType = ReturnType<typeof onPostChangeActionCreator>
 export type UpdateNewMessageBodyType = ReturnType<typeof updateNewMessageBodyCreator>
 export type UpdateSendMessageType = ReturnType<typeof sendMessageCreator>
-export type FollowACType = ReturnType<typeof followAC>
-export type UnfollowACType = ReturnType<typeof unfollowAC>
-export type SetUsersACType = ReturnType<typeof setUsersAC>
-export type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
-export type setTotalUserCountACType = ReturnType<typeof setTotalUserCountAC>
-export type setFetchingACType = ReturnType<typeof setFetchingAC>
+
 
 let store:  StoreType = {
     _state: {
