@@ -1,4 +1,11 @@
-import {FollowACType, setCurrentPageACType, setTotalUserCountACType, SetUsersACType, UnfollowACType} from "./Store";
+import {
+    FollowACType,
+    setCurrentPageACType,
+    setFetchingACType,
+    setTotalUserCountACType,
+    SetUsersACType,
+    UnfollowACType
+} from "./Store";
 
 export type UsersPageType = Array<UsersType>
 
@@ -25,22 +32,27 @@ export type InitialStateType = {
     pageSize: number
     totalUserCount: number
     currentPage: number
+    isFetching: boolean
 }
+
+type UnionTypeUser =  FollowACType | UnfollowACType | SetUsersACType | setCurrentPageACType | setTotalUserCountACType | setFetchingACType
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET-USERS'
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT'
+const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING'
 
 let initialState: InitialStateType =  {
     users: [],
     pageSize: 100,
     totalUserCount: 0,
     currentPage: 1,
+    isFetching: false
 }
 
-const usersReducer = (state = initialState, action: FollowACType | UnfollowACType | SetUsersACType | setCurrentPageACType | setTotalUserCountACType): InitialStateType => {
+const usersReducer = (state = initialState, action: UnionTypeUser): InitialStateType => {
 
     switch (action.type) {
         case FOLLOW:
@@ -72,6 +84,9 @@ const usersReducer = (state = initialState, action: FollowACType | UnfollowACTyp
         case SET_TOTAL_USERS_COUNT: {
             return  {...state, totalUserCount: action.totalCount}
         }
+        case TOGGLE_IS_FETCHING: {
+            return  {...state, isFetching: action.isFetching}
+        }
         default:
             return state
     }
@@ -82,6 +97,7 @@ export const unfollowAC = (userID: number) => ({type: UNFOLLOW, userID} as const
 export const setUsersAC = (users: UsersPageType) => ({type: SET_USERS, users} as const)
 export const setCurrentPageAC = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage} as const)
 export const setTotalUserCountAC = (totalCount: number) => ({type: SET_TOTAL_USERS_COUNT, totalCount} as const)
+export const setFetchingAC = (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching} as const)
 
 
 export default usersReducer
