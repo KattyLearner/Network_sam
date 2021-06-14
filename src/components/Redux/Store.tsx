@@ -83,7 +83,7 @@ let store:  StoreType = {
         this._rerenderEntireTree = observer
     },
 
-    dispatch(action) {
+    dispatch(action) {// @ts-ignore
         profileReducer(this._state.profilePage, action)
         dialogsReducer(this._state.messagePage, action)
 

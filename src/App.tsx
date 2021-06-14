@@ -12,6 +12,8 @@ import {DialogPropType} from "./components/Dialogs/DialogItem/DialogItem";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import Users from "./components/Users/Users";
 import {UsersContainer} from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 // type AppPropsType = {
 //     dispatch: (action: AddPostActionType | UpdateNewPostValueType | UpdateNewMessageBodyType | UpdateSendMessageType ) => void
@@ -38,11 +40,12 @@ const App = () => {
     return (
         <BrowserRouter>
             <div className='appWrapper'>
-                <Header/>
+                <HeaderContainer/>
                 <Navbar/>
                 <div className={'appWrapperContent'}>
                     <Route path={'/dialogs'} render ={()=> <DialogsContainer />} />
-                    <Route path={'/profile'} render ={()=> <Profile  />} />
+                    <Route path={'/profile/:userId?'} render ={()=>  // @ts-ignore
+                        <ProfileContainer />} />
                     <Route path={'/settings'} render ={()=> <Settings/>} />
                     <Route path={'/news'} render ={()=> <News/>} />
                     <Route path={'/users'} render ={()=> <UsersContainer/>} />

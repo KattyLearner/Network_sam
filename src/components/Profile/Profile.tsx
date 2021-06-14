@@ -1,23 +1,7 @@
 import React from 'react';
-import MyPosts from './MyPosts/MyPost';
-import s from './Profile.module.css'
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import {AddPostActionType, UpdateNewPostValueType} from "../Redux/Store";
-import {ProfilePageType} from "../../App";
 import MyPostsContainer from "./MyPosts/MyPostContainer";
-import {StoreType} from "../Redux/ReduxStore";
-
-
-// export type MyPostDataPropsType ={
-//     postsData: ProfilePageType
-//     updateNewPostText: (text: string) => void
-//     addPost: (value: string) => void
-// }
-
-// export type PostDataPropsType ={
-//     store: StoreType
-// }
-
+import {UserProfileType} from "./ProfileContainer";
 
 
 export type PostDataType = {
@@ -26,14 +10,15 @@ export type PostDataType = {
     like: string
     avatar: string
 }
+export type ProfileForContainerPropsType = {
+    profile: UserProfileType | null
+}
 
-
-const Profile = ()=>{
+const Profile = (props: ProfileForContainerPropsType)=>{
     return (
         <div>
-            <ProfileInfo />
+            <ProfileInfo profile={props.profile}/>
             <MyPostsContainer  />
-            {/*<MyPosts postsData={props.postsData} dispatch={props.dispatch}  />*/}
         </div>
     )
 }

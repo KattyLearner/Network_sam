@@ -1,8 +1,22 @@
-import {AddPostActionType, UpdateNewMessageBodyType, UpdateNewPostValueType, UpdateSendMessageType} from "./Store";
 import {PostDataType} from "../Profile/Profile";
+import {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogsReducer";
+import {UserProfileType} from "../Profile/ProfileContainer";
+
+export type AddPostActionType = ReturnType<typeof addPostActionCreator>
+export type UpdateNewPostValueType = ReturnType<typeof onPostChangeActionCreator>
+export type UpdateNewMessageBodyType = ReturnType<typeof updateNewMessageBodyCreator>
+export type UpdateSendMessageType = ReturnType<typeof sendMessageCreator>
+export type SetUserProfileType = ReturnType<typeof setUserProfile>
 
 const UPDATE_NEW_POST_VALUE = 'UPDATE-NEW-POST-VALUE'
 const ADD_POST = 'ADD-POST'
+const SET_USER_PROFILE = 'SET-USER-PROFILE'
+
+export type InitialStateType = {
+    postsData: PostDataType[]
+    newPostValue: string
+    profile: UserProfileType | null
+}
 
 let initialState =  {
     postsData: [
@@ -31,10 +45,11 @@ let initialState =  {
             avatar: 'https://99px.ru/sstorage/56/2017/05/11505171723012442.jpg'
         },
     ],
-    newPostValue: ''
+    newPostValue: '',
+    profile: null
 }
 
-const profileReducer = (state = initialState, action: AddPostActionType | UpdateNewPostValueType | UpdateNewMessageBodyType | UpdateSendMessageType) => {
+const profileReducer = (state: InitialStateType = initialState, action: AddPostActionType | UpdateNewPostValueType | UpdateNewMessageBodyType | UpdateSendMessageType | SetUserProfileType) => {
 
     switch (action.type) {
         case ADD_POST: {
@@ -54,6 +69,12 @@ const profileReducer = (state = initialState, action: AddPostActionType | Update
             let stateCopy = {...state}
             stateCopy.newPostValue = action.postText
             return stateCopy }
+
+        case SET_USER_PROFILE: {
+            let stateCopy = {...state, profile: action.profile}
+            return stateCopy
+        }
+
         default: return state
     }
 
@@ -61,6 +82,7 @@ const profileReducer = (state = initialState, action: AddPostActionType | Update
 
 export const addPostActionCreator = () => ({type: ADD_POST} as const)
 export const onPostChangeActionCreator = (value: string) => ({type: UPDATE_NEW_POST_VALUE , postText: value } as const)
+export const setUserProfile = (profile: UserProfileType) => ({type: SET_USER_PROFILE, profile } as const)
 
 
 

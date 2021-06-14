@@ -1,13 +1,20 @@
 import React from 'react';
 import s from './ProfileInfo.module.css'
+import {ProfileForContainerPropsType} from "../Profile";
+import Preloader from "../../Common/Preloader";
 
-const ProfileInfo = () => {
-   return (
+const ProfileInfo = (props: ProfileForContainerPropsType) => {
+    if (!props.profile) {
+       return  <Preloader />
+    }
+    return (
    <div>
        <div className={s.prof}>
-           <img src='https://media.istockphoto.com/photos/cute-children-or-baby-card-white-clouds-on-the-light-blue-wooden-picture-id1090975842?b=1&k=6&m=1090975842&s=170667a&w=0&h=g5eRHfTh7wGGhKBbnhUoqLmPDIDc3tF6f4kH_5B23I4='/>
+           <img src='https://i0.wp.com/www.euroscientist.com/wp-content/uploads/2019/06/cropped-social-media-3846597_1280-1.png?resize=672%2C372&ssl=1'/>
        </div>
        <div className={s.descriptionBlock}>
+           <img
+               src={props.profile.photos.large}/>
         avatar description
        </div>
    </div>

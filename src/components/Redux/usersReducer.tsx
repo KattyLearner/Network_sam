@@ -7,6 +7,8 @@ export type setFetchingACType = ReturnType<typeof setFetching>
 
 export type UsersPageType = Array<UsersType>
 
+
+
 export type UsersType = {
     name: string
     id: number
@@ -21,10 +23,7 @@ export type PhotoType = {
     small: string
     large: string
 }
-// export type LocationType = {
-//     city: string
-//     country: string
-// }
+
 export type InitialStateType = {
     users: UsersPageType
     pageSize: number
