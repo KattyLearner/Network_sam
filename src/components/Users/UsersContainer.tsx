@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import {
     follow,
-    InitialStateType, setCurrentPage, setFetching, setTotalUserCount, setUsers, unfollow,
+    InitialStateType, setCurrentPage, setFetching, setFetchingProgress, setTotalUserCount, setUsers, unfollow,
     UsersPageType
 } from "../Redux/usersReducer";
 import {AppStateType} from "../Redux/ReduxStore";
@@ -23,6 +23,7 @@ type MapDispatchToPropsType = {
     setCurrentPage: (currentPage: number) => void
     setTotalUserCount: (totalCount: number) => void
     setFetching: (isFetching: boolean) => void
+    setFetchingProgress: (isFetching: boolean, userId: number) => void
 }
 
 class UserContainerComponent extends React.Component<UsersPropsType, AppStateType> {
@@ -55,12 +56,14 @@ class UserContainerComponent extends React.Component<UsersPropsType, AppStateTyp
                 null
             }
             <UsersFunc totalUserCount={this.props.usersPage.totalUserCount}
-                          currentPage={this.props.usersPage.currentPage}
-                          pageSize={this.props.usersPage.pageSize}
-                          users={this.props.usersPage.users}
-                          onPageChanged={this.onPageChanged}
-                          follow={this.props.follow}
-                          unfollow={this.props.unfollow}
+                       currentPage={this.props.usersPage.currentPage}
+                       pageSize={this.props.usersPage.pageSize}
+                       users={this.props.usersPage.users}
+                       onPageChanged={this.onPageChanged}
+                       follow={this.props.follow}
+                       unfollow={this.props.unfollow}
+                       setFetchingProgress={this.props.setFetchingProgress}
+                       followingInProgress={this.props.usersPage.followingInProgress}
         />
         </>
     } }
@@ -83,5 +86,6 @@ export const UsersContainer = connect (mapStateToProps, {
     setUsers,
     setCurrentPage,
     setTotalUserCount,
-    setFetching
+    setFetching,
+    setFetchingProgress
     })(UserContainerComponent)
