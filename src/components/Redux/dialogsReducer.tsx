@@ -5,7 +5,7 @@ import {
     UpdateSendMessageType
 } from "./profileReducer";
 
-
+export type UnionDialogsTypesAC = AddPostActionType | UpdateNewPostValueType | UpdateNewMessageBodyType | UpdateSendMessageType
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 const SEND_MESSAGE = 'SEND-MESSAGE'
 
@@ -28,12 +28,11 @@ let initialState =  {
     ]
 }
 
-const dialogsReducer = (state = initialState, action: AddPostActionType | UpdateNewPostValueType | UpdateNewMessageBodyType | UpdateSendMessageType) => {
+const dialogsReducer = (state = initialState, action: UnionDialogsTypesAC) => {
   let stateCopy = {
       ...state,
       messageData: [...state.messageData]
   }
-
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:
             stateCopy.newMessageBody = action.newBody

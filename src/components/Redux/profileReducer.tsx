@@ -1,6 +1,10 @@
 import {PostDataType} from "../Profile/Profile";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogsReducer";
 import {UserProfileType} from "../Profile/ProfileContainer";
+import {Dispatch} from "redux";
+import {profileAPI, userFollowAPI} from "../../API/api";
+import {follow, setFetchingProgress} from "./usersReducer";
+import {AppActionCreatorsTypes} from "./ReduxStore";
 
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type UpdateNewPostValueType = ReturnType<typeof onPostChangeActionCreator>
@@ -12,6 +16,7 @@ const UPDATE_NEW_POST_VALUE = 'UPDATE-NEW-POST-VALUE'
 const ADD_POST = 'ADD-POST'
 const SET_USER_PROFILE = 'SET-USER-PROFILE'
 
+export type UnionProfileTypesAC = AddPostActionType | UpdateNewPostValueType | UpdateNewMessageBodyType | UpdateSendMessageType | SetUserProfileType
 export type InitialStateType = {
     postsData: PostDataType[]
     newPostValue: string
@@ -49,7 +54,7 @@ let initialState =  {
     profile: null
 }
 
-const profileReducer = (state: InitialStateType = initialState, action: AddPostActionType | UpdateNewPostValueType | UpdateNewMessageBodyType | UpdateSendMessageType | SetUserProfileType) => {
+const profileReducer = (state: InitialStateType = initialState, action: UnionProfileTypesAC) => {
 
     switch (action.type) {
         case ADD_POST: {
@@ -83,6 +88,15 @@ const profileReducer = (state: InitialStateType = initialState, action: AddPostA
 export const addPostActionCreator = () => ({type: ADD_POST} as const)
 export const onPostChangeActionCreator = (value: string) => ({type: UPDATE_NEW_POST_VALUE , postText: value } as const)
 export const setUserProfile = (profile: UserProfileType) => ({type: SET_USER_PROFILE, profile } as const)
+
+export const getProfileThunkCreator = (userId: number) => {
+    return (dispatch: Dispatch<AppActionCreatorsTypes> ) => {
+        profileAPI.getProfile(userId)
+            .then(response => {
+                dispatch(setUserProfile(response.data))
+            })
+    }
+}
 
 
 

@@ -1,5 +1,6 @@
 import {userAPI, userFollowAPI} from "../../API/api";
 import {Dispatch} from "redux";
+import {AppActionCreatorsTypes} from "./ReduxStore";
 
 export type FollowACType = ReturnType<typeof follow>
 export type UnfollowACType = ReturnType<typeof unfollow>
@@ -35,7 +36,7 @@ export type InitialStateType = {
     followingInProgress: Array<number>
 }
 
-type UnionTypeUser =  FollowACType | UnfollowACType | SetUsersACType | setCurrentPageACType | setTotalUserCountACType | setFetchingACType | setFetchingProgressType
+export type UnionTypeUserAC =  FollowACType | UnfollowACType | SetUsersACType | setCurrentPageACType | setTotalUserCountACType | setFetchingACType | setFetchingProgressType
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
@@ -54,7 +55,7 @@ let initialState: InitialStateType =  {
     followingInProgress: []
 }
 
-const usersReducer = (state = initialState, action: UnionTypeUser): InitialStateType => {
+const usersReducer = (state = initialState, action: UnionTypeUserAC): InitialStateType => {
 
     switch (action.type) {
         case FOLLOW:
@@ -109,8 +110,7 @@ export const setFetchingProgress = (isFetching: boolean, userUd: number) => ({ty
 
 
 export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
-
-    return (dispatch: Dispatch ) => {
+    return (dispatch: Dispatch<AppActionCreatorsTypes>) => {
         dispatch(setFetching(true))
         userAPI.getUsers(currentPage, pageSize)
             .then(data => {
@@ -120,9 +120,8 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
             })
     }
 }
-
 export const getUnFollowThunkCreator = (id: number) => {
-    return (dispatch: Dispatch ) => {
+    return (dispatch: Dispatch<AppActionCreatorsTypes> ) => {
         dispatch(setFetchingProgress(true, id))
         userFollowAPI.getUnFollow(id)
             .then(response=>{
@@ -135,7 +134,7 @@ export const getUnFollowThunkCreator = (id: number) => {
     }
 }
 export const getFollowThunkCreator = (id: number) => {
-    return (dispatch: Dispatch ) => {
+    return (dispatch: Dispatch<AppActionCreatorsTypes> ) => {
        dispatch(setFetchingProgress(true, id))
         userFollowAPI.getFollow(id)
             .then(response=>{
@@ -146,5 +145,6 @@ export const getFollowThunkCreator = (id: number) => {
             })
     }
 }
+
 
 export default usersReducer

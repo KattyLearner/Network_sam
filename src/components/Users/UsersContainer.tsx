@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import {
     follow, getFollowThunkCreator, getUnFollowThunkCreator, getUsersThunkCreator,
-    InitialStateType, setCurrentPage, unfollow,
+    InitialStateType, setCurrentPage, setUsers, unfollow, UsersPageType,
 } from "../Redux/usersReducer";
 import {AppStateType} from "../Redux/ReduxStore";
 import UsersFunc from "./UserFunc";
@@ -24,7 +24,7 @@ type MapDispatchToPropsType = {
     getFollowThunkCreator: (id: number) => void
 }
 
-class UserContainerComponent extends React.Component<UsersPropsType, AppStateType> {
+class UserContainerComponent extends React.Component<UsersContainerPropsType, AppStateType> {
     componentDidMount() {
         this.props.getUsersThunkCreator(this.props.usersPage.currentPage, this.props.usersPage.pageSize)
     }
@@ -64,7 +64,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 }
 
-export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
+export type UsersContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 
 export const UsersContainer = connect (mapStateToProps, {
