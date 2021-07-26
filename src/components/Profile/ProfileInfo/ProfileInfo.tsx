@@ -2,6 +2,7 @@ import React from 'react';
 import s from './ProfileInfo.module.css'
 import {ProfileForContainerPropsType} from "../Profile";
 import Preloader from "../../Common/Preloader";
+import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props: ProfileForContainerPropsType) => {
     if (!props.profile) {
@@ -15,6 +16,7 @@ const ProfileInfo = (props: ProfileForContainerPropsType) => {
        <div className={s.descriptionBlock}>
            <img
                src={props.profile.photos.large}/>
+               <ProfileStatus status={'Testing'}/>
         avatar description
        </div>
    </div>

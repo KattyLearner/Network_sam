@@ -18,7 +18,7 @@ export type UsersType = {
     uniqueUrName: string
     photos: PhotoType
     status: string
-    followed: boolean
+         followed: boolean
     // location: LocationType
 }
 
